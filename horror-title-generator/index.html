@@ -12,15 +12,40 @@ body{
 margin:0;
 font-family:Arial;
 color:white;
-text-align:center;
 background-image:url("https://images.unsplash.com/photo-1509248961158-e54f6934749c");
 background-size:cover;
 background-position:center;
 background-attachment:fixed;
 }
 
+/* NAVBAR */
+
+.navbar{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:15px 30px;
+background:rgba(0,0,0,0.9);
+border-bottom:2px solid #ff2e2e;
+}
+
+.logo{
+color:#ff2e2e;
+font-size:20px;
+font-weight:bold;
+}
+
+.navbar a{
+color:white;
+text-decoration:none;
+margin-left:20px;
+font-weight:bold;
+}
+
+/* PAGE */
+
 .overlay{
-background:rgba(0,0,0,0.75);
+background:rgba(0,0,0,0.85);
 min-height:100vh;
 padding:40px 20px;
 }
@@ -28,21 +53,21 @@ padding:40px 20px;
 .hero{
 max-width:800px;
 margin:auto;
-background:rgba(0,0,0,0.85);
+background:rgba(0,0,0,0.9);
 padding:40px;
 border-radius:12px;
-box-shadow:0 0 40px rgba(255,0,0,0.4);
+box-shadow:0 0 40px rgba(255,0,0,0.5);
+text-align:center;
 }
 
 h1{
-color:#ff3c3c;
+color:#ff2e2e;
 font-size:42px;
-margin-bottom:10px;
 }
 
 .tagline{
-color:#ddd;
-margin-bottom:25px;
+color:#ccc;
+margin-bottom:20px;
 }
 
 input{
@@ -50,7 +75,7 @@ width:80%;
 padding:12px;
 border:none;
 border-radius:6px;
-margin-top:15px;
+margin-top:10px;
 }
 
 button{
@@ -73,7 +98,7 @@ margin-top:25px;
 text-align:left;
 }
 
-.title{
+.item{
 background:#000;
 padding:10px;
 margin:8px 0;
@@ -93,17 +118,19 @@ border-radius:4px;
 background:#666;
 }
 
+/* SEO */
+
 .seo{
 max-width:800px;
 margin:60px auto;
 line-height:1.6;
-background:rgba(0,0,0,0.8);
+background:rgba(0,0,0,0.85);
 padding:30px;
 border-radius:10px;
 }
 
 h2{
-color:#ff3c3c;
+color:#ff2e2e;
 }
 
 </style>
@@ -112,6 +139,20 @@ color:#ff3c3c;
 
 <body>
 
+<!-- NAVBAR -->
+
+<div class="navbar">
+
+<div class="logo">
+Horror Creator Tools
+</div>
+
+<div>
+<a href="../">Home</a>
+</div>
+
+</div>
+
 <div class="overlay">
 
 <div class="hero">
@@ -119,7 +160,7 @@ color:#ff3c3c;
 <h1>Horror Title Generator</h1>
 
 <p class="tagline">
-Create viral horror titles for YouTube, creepypasta stories and scary content.
+Create viral horror story titles for YouTube and creepypasta videos.
 </p>
 
 <input id="idea" placeholder="Enter your horror idea (example: haunted house)">
@@ -131,7 +172,6 @@ Create viral horror titles for YouTube, creepypasta stories and scary content.
 <div class="results" id="results"></div>
 
 </div>
-
 
 <div class="seo">
 
@@ -160,24 +200,13 @@ attention-grabbing titles to increase clicks and engagement.
 <h2>FAQ</h2>
 
 <h3>Is this horror title generator free?</h3>
-
-<p>
-Yes, this tool is completely free for writers and content creators.
-</p>
+<p>Yes. This generator is completely free for writers and creators.</p>
 
 <h3>Can I use these titles for YouTube videos?</h3>
+<p>Yes. Many horror creators use generated titles for storytelling videos and creepypasta narrations.</p>
 
-<p>
-Yes, the generated titles can be used for horror stories,
-creepypasta videos and YouTube content.
-</p>
-
-<h3>What type of horror ideas can I use?</h3>
-
-<p>
-You can enter ideas such as haunted houses, abandoned hospitals,
-ghosts, monsters or any scary concept.
-</p>
+<h3>What horror topics work best?</h3>
+<p>Common horror topics include haunted houses, paranormal encounters, cursed objects and mysterious disappearances.</p>
 
 </div>
 
@@ -187,7 +216,7 @@ ghosts, monsters or any scary concept.
 
 function generate(){
 
-let idea = document.getElementById("idea").value
+let idea=document.getElementById("idea").value
 
 if(idea===""){
 idea="horror"
@@ -223,7 +252,7 @@ while(used.includes(random))
 used.push(random)
 
 results+=`
-<div class="title">
+<div class="item">
 <span>${random}</span>
 <span class="copy" onclick="copyText('${random}')">copy</span>
 </div>
@@ -238,7 +267,6 @@ document.getElementById("results").innerHTML=results
 function copyText(text){
 
 navigator.clipboard.writeText(text)
-
 alert("Copied!")
 
 }
