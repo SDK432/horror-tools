@@ -19,7 +19,7 @@ background-attachment:fixed;
 }
 
 .overlay{
-background:rgba(0,0,0,0.8);
+background:rgba(0,0,0,0.85);
 min-height:100vh;
 padding:40px 20px;
 }
@@ -41,7 +41,15 @@ font-size:42px;
 
 .tagline{
 color:#ccc;
-margin-bottom:25px;
+margin-bottom:20px;
+}
+
+input{
+width:80%;
+padding:12px;
+border:none;
+border-radius:6px;
+margin-top:10px;
 }
 
 button{
@@ -84,15 +92,6 @@ border-radius:4px;
 background:#666;
 }
 
-.seo{
-max-width:800px;
-margin:60px auto;
-line-height:1.6;
-background:rgba(0,0,0,0.85);
-padding:30px;
-border-radius:10px;
-}
-
 </style>
 
 </head>
@@ -109,26 +108,13 @@ border-radius:10px;
 Create disturbing creepypasta story titles instantly.
 </p>
 
+<input id="idea" placeholder="Enter a creepypasta topic (example: haunted game)">
+
+<br>
+
 <button onclick="generate()">Generate Titles</button>
 
 <div class="results" id="results"></div>
-
-</div>
-
-
-<div class="seo">
-
-<h2>What is a Creepypasta Title Generator?</h2>
-
-<p>
-A creepypasta title generator helps writers create disturbing and viral horror story titles for Reddit, YouTube and horror blogs.
-</p>
-
-<h2>Why Use This Tool</h2>
-
-<p>
-Many horror creators struggle to find catchy titles. This generator instantly creates creepy ideas that attract readers and viewers.
-</p>
 
 </div>
 
@@ -138,18 +124,24 @@ Many horror creators struggle to find catchy titles. This generator instantly cr
 
 function generate(){
 
-let items=[
+let idea=document.getElementById("idea").value
 
-"The Story Posted At 3AM",
-"The Reddit Thread That Disappeared",
-"The Creepypasta Nobody Believed",
-"The Story That Should Not Exist",
-"The Thread Hidden On The Dark Web",
-"The Post That Ruined My Life",
-"The Most Disturbing Internet Story",
-"The Message Hidden In The Story",
-"The Creepypasta That Became Real",
-"The Story I Wish I Never Read"
+if(idea===""){
+idea="creepypasta"
+}
+
+let templates=[
+
+"The Reddit Thread About "+idea,
+"The "+idea+" Story That Disappeared",
+"The Post About "+idea+" That Went Viral",
+"The Dark Secret Behind "+idea,
+"The "+idea+" Story Nobody Believed",
+"The Night I Read About "+idea,
+"The Message Hidden In The "+idea+" Story",
+"The "+idea+" Thread Posted At 3AM",
+"The Internet Story About "+idea,
+"The "+idea+" Story I Wish I Never Found"
 
 ]
 
@@ -161,7 +153,7 @@ for(let i=0;i<5;i++){
 let random
 
 do{
-random=items[Math.floor(Math.random()*items.length)]
+random=templates[Math.floor(Math.random()*templates.length)]
 }
 while(used.includes(random))
 
