@@ -4,30 +4,77 @@
 
 <title>Horror Title Generator</title>
 
-<meta name="description" content="Generate scary horror titles instantly.">
+<meta name="description" content="Generate viral horror story titles for YouTube and creepypasta stories.">
 
 <style>
 
 body{
 font-family:Arial;
-background:#0b0b0b;
+background:linear-gradient(180deg,#0b0b0b,#1a0000);
 color:white;
 text-align:center;
 padding:40px;
 }
 
-button{
-padding:12px;
-background:#ff2e2e;
-color:white;
-border:none;
-cursor:pointer;
+.container{
+max-width:700px;
+margin:auto;
+background:#111;
+padding:30px;
+border-radius:10px;
+box-shadow:0 0 20px rgba(255,0,0,0.2);
 }
 
-.result{
+h1{
+color:#ff3c3c;
+}
+
+input{
+width:80%;
+padding:12px;
+margin-top:15px;
+border:none;
+border-radius:5px;
+}
+
+button{
 margin-top:20px;
-font-size:22px;
-color:#00ffcc;
+padding:12px 20px;
+background:#ff2e2e;
+border:none;
+color:white;
+font-size:16px;
+cursor:pointer;
+border-radius:5px;
+}
+
+button:hover{
+background:#ff5555;
+}
+
+.results{
+margin-top:25px;
+text-align:left;
+}
+
+.title{
+background:#000;
+padding:10px;
+margin:8px 0;
+border-radius:5px;
+display:flex;
+justify-content:space-between;
+}
+
+.copy{
+background:#333;
+padding:5px 10px;
+cursor:pointer;
+border-radius:3px;
+}
+
+.copy:hover{
+background:#666;
 }
 
 </style>
@@ -36,29 +83,71 @@ color:#00ffcc;
 
 <body>
 
+<div class="container">
+
 <h1>Horror Title Generator</h1>
 
-<button onclick="generate()">Generate</button>
+<p>Create viral horror story titles for YouTube and creepypasta videos.</p>
 
-<div class="result" id="result"></div>
+<input id="idea" placeholder="Enter your horror idea (example: haunted house)">
+
+<br>
+
+<button onclick="generate()">Generate Titles</button>
+
+<div class="results" id="results"></div>
+
+</div>
 
 <script>
 
 function generate(){
 
-let items = [
+let idea = document.getElementById("idea").value
 
-"The Door That Appeared Overnight",
-"The Voice Under My Bed",
-"The Thing Living In My Walls",
-"The Last Passenger On The Train",
-"My Dead Brother Texted Me"
+if(idea===""){
+idea="horror"
+}
+
+let templates=[
+
+"The Night I Entered The "+idea,
+"The Thing Living In My "+idea,
+"I Should Never Have Visited The "+idea,
+"The Last Time I Saw The "+idea,
+"The Secret Inside The "+idea,
+"The Door Behind The "+idea,
+"The Truth About The "+idea,
+"What Happened In The "+idea,
+"The Voice Coming From The "+idea,
+"The Dark Secret Of The "+idea
 
 ]
 
-let random = items[Math.floor(Math.random()*items.length)]
+let results=""
 
-document.getElementById("result").innerText = random
+for(let i=0;i<5;i++){
+
+let random=templates[Math.floor(Math.random()*templates.length)]
+
+results+=`
+<div class="title">
+<span>${random}</span>
+<span class="copy" onclick="copyText('${random}')">copy</span>
+</div>
+`
+
+}
+
+document.getElementById("results").innerHTML=results
+
+}
+
+function copyText(text){
+
+navigator.clipboard.writeText(text)
+
+alert("Copied!")
 
 }
 
