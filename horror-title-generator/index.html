@@ -9,43 +9,59 @@
 <style>
 
 body{
+margin:0;
 font-family:Arial;
-background:linear-gradient(180deg,#0b0b0b,#1a0000);
 color:white;
 text-align:center;
-padding:40px;
+background-image:url("https://images.unsplash.com/photo-1509248961158-e54f6934749c");
+background-size:cover;
+background-position:center;
+background-attachment:fixed;
 }
 
-.container{
-max-width:700px;
+.overlay{
+background:rgba(0,0,0,0.75);
+min-height:100vh;
+padding:40px 20px;
+}
+
+.hero{
+max-width:800px;
 margin:auto;
-background:#111;
-padding:30px;
-border-radius:10px;
-box-shadow:0 0 20px rgba(255,0,0,0.2);
+background:rgba(0,0,0,0.85);
+padding:40px;
+border-radius:12px;
+box-shadow:0 0 40px rgba(255,0,0,0.4);
 }
 
 h1{
 color:#ff3c3c;
+font-size:42px;
+margin-bottom:10px;
+}
+
+.tagline{
+color:#ddd;
+margin-bottom:25px;
 }
 
 input{
 width:80%;
 padding:12px;
-margin-top:15px;
 border:none;
-border-radius:5px;
+border-radius:6px;
+margin-top:15px;
 }
 
 button{
 margin-top:20px;
-padding:12px 20px;
+padding:12px 25px;
 background:#ff2e2e;
 border:none;
 color:white;
 font-size:16px;
 cursor:pointer;
-border-radius:5px;
+border-radius:6px;
 }
 
 button:hover{
@@ -61,7 +77,7 @@ text-align:left;
 background:#000;
 padding:10px;
 margin:8px 0;
-border-radius:5px;
+border-radius:6px;
 display:flex;
 justify-content:space-between;
 }
@@ -70,7 +86,7 @@ justify-content:space-between;
 background:#333;
 padding:5px 10px;
 cursor:pointer;
-border-radius:3px;
+border-radius:4px;
 }
 
 .copy:hover{
@@ -79,9 +95,15 @@ background:#666;
 
 .seo{
 max-width:800px;
-margin:auto;
-margin-top:40px;
+margin:60px auto;
 line-height:1.6;
+background:rgba(0,0,0,0.8);
+padding:30px;
+border-radius:10px;
+}
+
+h2{
+color:#ff3c3c;
 }
 
 </style>
@@ -90,11 +112,15 @@ line-height:1.6;
 
 <body>
 
-<div class="container">
+<div class="overlay">
+
+<div class="hero">
 
 <h1>Horror Title Generator</h1>
 
-<p>Create viral horror story titles for YouTube and creepypasta videos.</p>
+<p class="tagline">
+Create viral horror titles for YouTube, creepypasta stories and scary content.
+</p>
 
 <input id="idea" placeholder="Enter your horror idea (example: haunted house)">
 
@@ -105,6 +131,7 @@ line-height:1.6;
 <div class="results" id="results"></div>
 
 </div>
+
 
 <div class="seo">
 
@@ -133,13 +160,26 @@ attention-grabbing titles to increase clicks and engagement.
 <h2>FAQ</h2>
 
 <h3>Is this horror title generator free?</h3>
-<p>Yes, this tool is completely free for writers and content creators.</p>
+
+<p>
+Yes, this tool is completely free for writers and content creators.
+</p>
 
 <h3>Can I use these titles for YouTube videos?</h3>
-<p>Yes, the generated titles can be used for horror stories, creepypasta videos and YouTube content.</p>
+
+<p>
+Yes, the generated titles can be used for horror stories,
+creepypasta videos and YouTube content.
+</p>
 
 <h3>What type of horror ideas can I use?</h3>
-<p>You can enter ideas such as haunted houses, abandoned hospitals, ghosts, monsters or any scary concept.</p>
+
+<p>
+You can enter ideas such as haunted houses, abandoned hospitals,
+ghosts, monsters or any scary concept.
+</p>
+
+</div>
 
 </div>
 
@@ -168,11 +208,19 @@ let templates=[
 
 ]
 
+let used=[]
 let results=""
 
 for(let i=0;i<5;i++){
 
-let random=templates[Math.floor(Math.random()*templates.length)]
+let random
+
+do{
+random=templates[Math.floor(Math.random()*templates.length)]
+}
+while(used.includes(random))
+
+used.push(random)
 
 results+=`
 <div class="title">
@@ -194,6 +242,8 @@ navigator.clipboard.writeText(text)
 alert("Copied!")
 
 }
+
+generate()
 
 </script>
 
