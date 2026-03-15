@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Horror Title Generator</title>
+
+<meta name="description" content="Generate scary horror titles instantly.">
+
+<style>
+
+body{
+font-family:Arial;
+background:#0b0b0b;
+color:white;
+text-align:center;
+padding:40px;
+}
+
+button{
+padding:12px;
+background:#ff2e2e;
+color:white;
+border:none;
+cursor:pointer;
+}
+
+.result{
+margin-top:20px;
+font-size:22px;
+color:#00ffcc;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>Horror Title Generator</h1>
+
+<button onclick="generate()">Generate</button>
+
+<div class="result" id="result"></div>
+
+<script>
+
+function generate(){
+
+let items = [
+
+"The Door That Appeared Overnight",
+"The Voice Under My Bed",
+"The Thing Living In My Walls",
+"The Last Passenger On The Train",
+"My Dead Brother Texted Me"
+
+]
+
+let random = items[Math.floor(Math.random()*items.length)]
+
+document.getElementById("result").innerText = random
+
+}
+
+</script>
+
+</body>
+</html>
