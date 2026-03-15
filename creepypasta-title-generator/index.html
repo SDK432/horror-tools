@@ -4,7 +4,7 @@
 
 <title>Creepypasta Title Generator</title>
 
-<meta name="description" content="Generate creepy creepypasta story titles instantly.">
+<meta name="description" content="Generate creepy creepypasta titles instantly.">
 
 <style>
 
@@ -12,39 +12,85 @@ body{
 margin:0;
 font-family:Arial;
 color:white;
-text-align:center;
-background:linear-gradient(180deg,#000,#1a0000);
-padding:40px;
+background-image:url("https://images.unsplash.com/photo-1509248961158-e54f6934749c");
+background-size:cover;
+background-position:center;
+background-attachment:fixed;
 }
 
-.container{
-max-width:700px;
+.overlay{
+background:rgba(0,0,0,0.8);
+min-height:100vh;
+padding:40px 20px;
+}
+
+.hero{
+max-width:800px;
 margin:auto;
-background:#111;
-padding:30px;
-border-radius:10px;
-box-shadow:0 0 30px rgba(255,0,0,0.3);
+background:rgba(0,0,0,0.9);
+padding:40px;
+border-radius:12px;
+box-shadow:0 0 40px rgba(255,0,0,0.5);
+text-align:center;
 }
 
-h1{color:#ff2e2e;}
+h1{
+color:#ff2e2e;
+font-size:42px;
+}
+
+.tagline{
+color:#ccc;
+margin-bottom:25px;
+}
 
 button{
 margin-top:20px;
-padding:12px 20px;
+padding:12px 25px;
 background:#ff2e2e;
 border:none;
 color:white;
+font-size:16px;
 cursor:pointer;
-border-radius:5px;
+border-radius:6px;
 }
 
-.results{margin-top:20px;}
+button:hover{
+background:#ff5555;
+}
 
-.title{
+.results{
+margin-top:25px;
+text-align:left;
+}
+
+.item{
 background:#000;
 padding:10px;
-margin:8px;
-border-radius:5px;
+margin:8px 0;
+border-radius:6px;
+display:flex;
+justify-content:space-between;
+}
+
+.copy{
+background:#333;
+padding:5px 10px;
+cursor:pointer;
+border-radius:4px;
+}
+
+.copy:hover{
+background:#666;
+}
+
+.seo{
+max-width:800px;
+margin:60px auto;
+line-height:1.6;
+background:rgba(0,0,0,0.85);
+padding:30px;
+border-radius:10px;
 }
 
 </style>
@@ -53,9 +99,15 @@ border-radius:5px;
 
 <body>
 
-<div class="container">
+<div class="overlay">
+
+<div class="hero">
 
 <h1>Creepypasta Title Generator</h1>
+
+<p class="tagline">
+Create disturbing creepypasta story titles instantly.
+</p>
 
 <button onclick="generate()">Generate Titles</button>
 
@@ -63,36 +115,75 @@ border-radius:5px;
 
 </div>
 
+
+<div class="seo">
+
+<h2>What is a Creepypasta Title Generator?</h2>
+
+<p>
+A creepypasta title generator helps writers create disturbing and viral horror story titles for Reddit, YouTube and horror blogs.
+</p>
+
+<h2>Why Use This Tool</h2>
+
+<p>
+Many horror creators struggle to find catchy titles. This generator instantly creates creepy ideas that attract readers and viewers.
+</p>
+
+</div>
+
+</div>
+
 <script>
 
 function generate(){
 
-let titles=[
+let items=[
 
-"The Reddit Story That Ruined My Life",
-"The Thread Posted At 3AM",
-"The Creepypasta That Became Real",
-"The Story No One Should Read",
-"The Message Hidden In The Thread",
-"The Darkest Story On The Internet",
-"The Post That Disappeared",
+"The Story Posted At 3AM",
+"The Reddit Thread That Disappeared",
 "The Creepypasta Nobody Believed",
-"The Story I Wish I Never Read",
-"The Thread That Should Not Exist"
+"The Story That Should Not Exist",
+"The Thread Hidden On The Dark Web",
+"The Post That Ruined My Life",
+"The Most Disturbing Internet Story",
+"The Message Hidden In The Story",
+"The Creepypasta That Became Real",
+"The Story I Wish I Never Read"
 
 ]
 
+let used=[]
 let results=""
 
 for(let i=0;i<5;i++){
 
-let random=titles[Math.floor(Math.random()*titles.length)]
+let random
 
-results+=`<div class="title">${random}</div>`
+do{
+random=items[Math.floor(Math.random()*items.length)]
+}
+while(used.includes(random))
+
+used.push(random)
+
+results+=`
+<div class="item">
+<span>${random}</span>
+<span class="copy" onclick="copyText('${random}')">copy</span>
+</div>
+`
 
 }
 
 document.getElementById("results").innerHTML=results
+
+}
+
+function copyText(text){
+
+navigator.clipboard.writeText(text)
+alert("Copied!")
 
 }
 
